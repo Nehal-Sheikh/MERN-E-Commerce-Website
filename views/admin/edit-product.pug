@@ -1,0 +1,49 @@
+extends ../layouts/main-layout.pug
+
+//- here we are attaching in the styles section in the layout file
+block styles                                                          
+    link(rel="stylesheet", href="/css/product.css")
+    link(rel="stylesheet", href="/css/forms.css")
+
+//- here we are attaching in the content section in the layout file
+block content 
+    main
+        if editing   
+            form.product-form(action="/admin/edit-product" method="POST")
+                .form-control
+                    label(for="title") Title
+                    input(type="text", name="title" value=product.title)#title
+
+                .form-control
+                    label(for="imageUrl") Image URL
+                    input(type="text", name="imageUrl" value=product.imageUrl)#imageUrl
+
+                .form-control
+                    label(for="price") Price
+                    input(type="number", name="price" step="0.01" value=product.price)#price
+
+                .form-control
+                    label(for="description") Description
+                    textarea(name="description", rows="5")#description #{product.description} 
+                    input(type="hidden" value=product._id name="productId")
+
+                button.btn(type="submit") Update Product  
+        else 
+            form.product-form(action="/admin/add-product" method="POST")
+                .form-control
+                    label(for="title") Title
+                    input(type="text", name="title")#title
+
+                .form-control
+                    label(for="imageUrl") Image URL
+                    input(type="text", name="imageUrl")#imageUrl
+
+                .form-control
+                    label(for="price") Price
+                    input(type="number", name="price" step="0.01")#price
+
+                .form-control
+                    label(for="description") Description
+                    textarea(name="description", rows="5")#description
+
+                button.btn(type="submit") Add Product

@@ -1,0 +1,19 @@
+extends ../layouts/main-layout
+
+block styles 
+    link(rel="stylesheet", href="/css/orders.css")
+
+block content
+    main
+        if orders.length > 0 
+            ul.orders 
+                - orders.forEach(order => {
+                    li.orders__item
+                        h1 Order - # #{order._id}
+                        ul.orders__products 
+                            - order.products.forEach(p => {
+                                li.orders__products-item #{p.product.title} (#{p.quantity})
+                            - });
+                - });
+        else   
+            h1 Nothing There!
