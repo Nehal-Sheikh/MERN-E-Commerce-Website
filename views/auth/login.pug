@@ -7,7 +7,9 @@ block styles
 
 //- here we are attaching in the content section in the layout file
 block content 
-    main  
+    main
+        if errorMessage
+            .user-message.user-message--error #{errorMessage}
         form.login-form(action="/login" method="POST")
             .form-control
                 label(for="email") E-Mail
@@ -17,4 +19,6 @@ block content
                 label(for="password") Password
                 input(type="password", name="password")#password
 
+            //-here we have to _csrf in the name field so that csrf will know that here is a token
+            input(type="hidden" name="_csrf" value=csrfToken)
             button.btn(type="submit") Login

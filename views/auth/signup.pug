@@ -7,11 +7,14 @@ block styles
 
 //- here we are attaching in the content section in the layout file
 block content 
-    main  
-        form.login-form(action="/login" method="POST")
+    main
+        if errorMessage
+            .user-message.user-message--error #{errorMessage}  
+        form.login-form(action="/signup" method="POST")
             .form-control
                 label(for="email") E-Mail
-                input(type="email", name="email")#email
+                input(type="email", name="email")#email                                   
+                //- here name filed helps us to retriwnve data from the page
 
             .form-control
                 label(for="password") Password
@@ -19,6 +22,7 @@ block content
 
             .form-control
                 label(for="confirmPassword") Password
-                input(type="password", name="confirmPassword")#consfirmPassword
+                input(type="password", name="confirmPassword")#confirmPassword
 
+            input(type="hidden" name="_csrf" value=csrfToken)
             button.btn(type="submit") Signup
